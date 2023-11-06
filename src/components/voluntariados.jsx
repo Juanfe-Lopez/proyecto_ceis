@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./voluntariados.css";
-import { getFromFirebase, addToFirebase } from "../functions/firebaseHelper";
+import { getFromFirebase, addToFirebase } from "../functions/firebasehelper";
 
 function Voluntariados() {
   const [movies, setMovies] = useState([]);

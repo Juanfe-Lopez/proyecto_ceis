@@ -1,33 +1,65 @@
-import "./navbar.css";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import logo from '../img/logo.png';
+import './navbar.css';
 
 const Navbar = () => {
-  return (
-    <>
-      <header>
-        <div className="brand">
-          <a href="/">
-            <img src="https://s3-alpha-sig.figma.com/img/144c/0607/562cbc7ba3775f480816f8f32f271a19?Expires=1698624000&Signature=bfdC5aaSQrmfZkGMgu6uqfajta0DlmMoGeLcmmfOjOIM6pT3v35FwBr6AaGqeyFverqr8-W6rs-GB0Kq7xCbLsyRj4xqevmn3uu5JRgm1VZ5czDnaam7nL270G5NzRY-s8bfzTzX6lzMuuHInxKH6mtH62a4AXR9CVO-oMTglMZfDZQdtHDQSsxMhV-H1Id3OmDUcD4xOCdynwz9Bnvh2i9WzlybjGlKOAFbmwoygBxN8SYiWE4yiJ5FYERCEWznL60cbXxNXvJeY4ClXAI~e4ejqFUrnjMQOhm~zF8lGECpiNkkg-ZbVs4Q1Zx0zH9iE2sF9MoBfQFytjv1ZsriVQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="Logo"/>
-         </a>
-        </div>
-        <div>
-          <a href="/voluntariados">Match Voluntariados</a>
-        </div>
-        <div>
-          <a href="/Estadisticas">Estadisticas</a>
-        </div>
-        <div>
-          <a href="/Contactanos">Contactanos</a>
-        </div>
-        <div>
-          <a href="/Donar">Donar</a>
-        </div>
-        <div>
-          <a href="/Login">Iniciar Sesión</a>
-        </div>
+  const [user, setUser] = useState(null);
 
-      </header>
-      
-    </>
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // El usuario ha iniciado sesión
+        setUser(authUser);
+      } else {
+        // El usuario ha cerrado sesión
+        setUser(null);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      // Realiza cualquier acción necesaria al cerrar sesión, si es necesario
+    } catch (error) {
+      console.error('Error al cerrar sesión:', error);
+    }
+  };
+
+  return (
+    <header>
+      <div className="brand">
+        <Link to="/">
+          <img src={logo} alt="Logo" />
+        </Link>
+      </div>
+      <div>
+        <Link to="/voluntariados">Match Voluntariados</Link>
+      </div>
+      <div>
+        <Link to="/Estadisticas">Estadisticas</Link>
+      </div>
+      <div>
+        <Link to="/Contactanos">Contactanos</Link>
+      </div>
+      <div>
+        <Link to="/Donar">Donar</Link>
+      </div>
+      <div>
+        {user ? (
+          <Link to="/Perfil">
+            Perfil
+          </Link>
+        ) : (
+          <Link to="/Login">Iniciar Sesión</Link>
+        )}
+      </div>
+    </header>
   );
 };
 

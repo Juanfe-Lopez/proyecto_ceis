@@ -1,4 +1,4 @@
-import { collection, addDoc, getDocs, deleteDoc,doc, updateDoc, getDoc, setDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs, deleteDoc, doc, updateDoc, getDoc, setDoc, query, where } from "firebase/firestore";
 import { db } from '../firebase';
 
 
@@ -64,4 +64,23 @@ const deleteFromFirebase = async (docId, collectionName) => {
     console.error("Error deleting document: ", e);
   }
 };
-export { addToFirebase, getFromFirebase, updateFromFirebase, deleteFromFirebase, getFromFirebaseID };
+const getUserByEmail = async (email) => {
+  try {
+    const usersCollection = collection(db, 'users');
+    const userQuery = query(usersCollection, where('email', '==', email));
+    const querySnapshot = await getDocs(userQuery);
+
+    if (querySnapshot.empty) {
+      console.log('No se encontró ningún usuario con el correo electrónico:', email);
+      return null;
+    }
+
+    const userData = querySnapshot.docs[0].data();
+    return userData;
+  } catch (error) {
+    console.error('Error al obtener datos del usuario por correo electrónico:', error);
+    return null;
+  }
+};
+
+export { addToFirebase, getFromFirebase, updateFromFirebase, deleteFromFirebase, getFromFirebaseID, getUserByEmail };

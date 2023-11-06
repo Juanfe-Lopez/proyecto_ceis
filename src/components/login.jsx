@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import './login.css';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+
 function LoginForm() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,17 +17,27 @@ function LoginForm() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para procesar el inicio de sesión
-    console.log('Email:', email);
-    console.log('Contraseña:', password);
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      console.log('Usuario autenticado:', user);
+
+      // Puedes redirigir al usuario a la página principal u otra página de tu elección
+      navigate('/home');
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode, errorMessage);
+    }
   };
 
   return (
     <div className="login-form">
       <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div className="form-group">
           <label htmlFor="email">Correo Electrónico:</label>
           <input
@@ -45,9 +60,11 @@ function LoginForm() {
             required
           />
         </div>
-        <button type="submit">Iniciar Sesión</button> 
-        <a href='/SignUp'> <p>¿No tienes una cuenta? Registrate dando click aquí</p></a>
+        <button type="submit">Iniciar Sesión</button>
       </form>
+      <a href='/SignUp'>
+        <p>¿No tienes una cuenta? Regístrate dando click aquí</p>
+      </a>
     </div>
   );
 }
