@@ -1,0 +1,42 @@
+.donations {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .donations h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .donations p {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .donations ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .donations li {
+    font-size: 1.2rem;
+    color: #555;
+    margin: 10px 0;
+  }
+  
+  .donations strong {
+    font-weight: bold;
+    color: #007BFF;
+  }
+  
+  .donations li:not(:first-child) {
+    margin-top: 20px;
+  }
+  

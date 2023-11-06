@@ -1,0 +1,27 @@
+header{
+    grid-area: header;
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    position: sticky;
+    top:0;
+
+;
+}
+.hide {
+    display: none;
+  }
+header a{
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+}
+.brand a{
+    font-size: 3rem;
+
+}
+header a:hover{
+    color: rgba(12, 60, 46, 0.46);;
+}
