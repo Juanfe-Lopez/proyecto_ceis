@@ -5,9 +5,11 @@ import { getFromFirebaseID, getUserByEmail, getUserByEmail2, updateFromFirebase 
 import { useAuth } from '../context/AuthContext'; // Asegúrate de importar tu contexto de autenticación
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase'; // Asegúrate de importar tu instancia de Firestore
+import { useNavigate } from 'react-router-dom';
 
 
 function DetalleVoluntariado() {
+    const navigate= useNavigate();
   const { id } = useParams();
   const [voluntariado, setVoluntariado] = useState(null);
   const { currentUser } = useAuth(); // Obtén el usuario actual desde el contexto de autenticación
@@ -72,7 +74,7 @@ function DetalleVoluntariado() {
           alert('Te has inscrito exitosamente en el voluntariado.');
   
           // Redirige a la página principal después de la inscripción
-          window.location.href = '/'; // Cambia '/home' al URL de tu página principal
+          navigate('/');
         } else {
           alert('Ya estás inscrito en este voluntariado.');
         }
