@@ -10,6 +10,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Voluntariados from './components/voluntariados';
 import Register from './components/registrarse';
 import Profile from './components/perfil';
+import Details from './components/DetalleVoluntariado';
+import Crear from './components/crearVoluntariado';
+
 import {AuthProvider} from './context/AuthContext'
 
 
@@ -31,6 +34,8 @@ class App extends Component {
               <Route path="/Login" element={<LoginForm/>} />
               <Route path="/SignUp" element={<Register/>} />
               <Route path="/Perfil" element={<Profile/>} />
+              <Route path="/Crear" element={<Crear/>} />
+              <Route path="/voluntariados/:id" element={<Details/>} />
               </Routes>
             </div>
           </AuthProvider>

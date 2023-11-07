@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from "react";
 import "./voluntariados.css";
-import { getFromFirebase, addToFirebase } from "../functions/firebasehelper";
+import { getFromFirebase } from "../functions/firebasehelper";
 
 function Voluntariados() {
-  const [movies, setMovies] = useState([]);
+  const [voluntariados, setVoluntariados] = useState([]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
+    const fetchVoluntariados = async () => {
       const data = await getFromFirebase("voluntariados");
-      setMovies(data);
+      setVoluntariados(data);
     };
-    fetchMovies();
+    fetchVoluntariados();
   }, []);
 
   return (
     <div>
-      <h1>Movie List</h1>
-      <ul className="products">
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <div className="product">
-              <img src={movie. img} />
-
-              <a className="product-name" href={`/BlogPost/${movie.id}`}>
-                {movie.Nombre}
+      <h1>Lista de Voluntariados</h1>
+      <ul className="voluntariados-list">
+        {voluntariados.map((voluntariado) => (
+          <li key={voluntariado.id}>
+            <div className="voluntariado">
+              <img src={voluntariado.imagenURL} alt={voluntariado.nombre} />
+              <a className="voluntariado-name" href={`/voluntariados/${voluntariado.id}`}>
+                {voluntariado.nombre}
               </a>
-
-              <div className="product-price">{movie.Descripcion}</div>
+              <div className="voluntariado-description">{voluntariado.descripcion}</div>
+              {/* Agrega aquí más detalles del voluntariado según tus datos */}
             </div>
           </li>
         ))}

@@ -82,5 +82,25 @@ const getUserByEmail = async (email) => {
     return null;
   }
 };
+const getUserByEmail2 = async (email) => {
+  try {
+    const usersRef = collection(db, 'users');
+    const querySnapshot = await getDocs(usersRef);
+    let userData = null;
 
-export { addToFirebase, getFromFirebase, updateFromFirebase, deleteFromFirebase, getFromFirebaseID, getUserByEmail };
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      if (data.email === email) {
+        userData = { id: doc.id, ...data };
+      }
+    });
+
+    return userData;
+  } catch (error) {
+    console.error('Error al obtener el usuario por correo electrónico:', error);
+    return null;
+  }
+};
+
+
+export { addToFirebase, getFromFirebase, updateFromFirebase, deleteFromFirebase, getFromFirebaseID, getUserByEmail, getUserByEmail2 };

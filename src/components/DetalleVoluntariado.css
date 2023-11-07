@@ -1,0 +1,90 @@
+.content{
+    
+    padding: 1rem;
+    background-color: white;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;  
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+}
+.details{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.details-img{
+    flex: 5 5 25rem;
+    border-radius: 2rem;
+
+}
+.details-img img{
+    max-width: 20rem;
+    width: 25%;
+    border-radius: 2rem;
+}
+.details-info, .details-action{
+    flex: 0.1 0.1 10rem;
+    color: black;
+
+}
+.details-info ul, .details-action ul{
+    padding: 0;
+    list-style-type: none;
+}
+.details-info h1{
+    font-size: 2rem;
+    margin: 0;
+}
+.details-info li, .details-action li{
+    margin-bottom: 1rem;
+}
+.details-action{
+    border: 0.1rem gray solid;
+    border-radius: 0.5rem;
+    background-color: beige;
+    padding: 1rem;
+}
+.primary{
+    font: 1.5rem helvetica;
+    padding: 1rem;
+    border: 0.1rem #808080 solid;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: #f0c040;
+
+
+}
+.primary:hover{
+    border: 0.5rem #404040 solid;
+
+
+}
+button{
+
+    font: 1.5rem helvetica;
+    padding: 1rem;
+    border: 0.1rem #808080 solid;
+    border-radius: 1rem;
+    cursor: pointer;
+
+}
+button:hover{
+    border: 0.5rem #404040 solid;
+
+}
+button.primary{
+    background-color: #f0c040;
+}
+.fw{
+    width: 100%;
+
+}
+h1{
+    color: black;
+}

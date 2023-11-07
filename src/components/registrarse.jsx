@@ -51,6 +51,8 @@ const Register = () => {
         skills,
         interests,
         role, // Agrega el rol al objeto de usuario
+        voluntariados: [] // Inicializar voluntariados como un array vacío
+
       };
 
       // Agregar el objeto de usuario a Firebase en la colección 'users'
